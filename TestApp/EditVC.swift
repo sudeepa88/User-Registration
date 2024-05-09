@@ -40,7 +40,7 @@ class EditVC: UIViewController, UITextFieldDelegate {
         textField.borderStyle = .roundedRect
         textField.keyboardType = .default
         textField.translatesAutoresizingMaskIntoConstraints = false
-        //textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = true
         return textField
     }()
     
