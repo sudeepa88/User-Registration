@@ -131,6 +131,24 @@ class EditVC: UIViewController, UITextFieldDelegate {
     } //setupUI
     
     @objc func editButtonTapped() {
+        
+        
+        // Check if any field is empty
+            if accountNameTextField.text?.isEmpty ?? true {
+                displayWarning(message: "Please enter account name")
+                return
+            }
+            
+            if emailTextField.text?.isEmpty ?? true {
+                displayWarning(message: "Please enter email address")
+                return
+            }
+            
+            if passwordTextField.text?.isEmpty ?? true {
+                displayWarning(message: "Please enter password")
+                return
+            }
+        
         guard let password = passwordTextField.text else {
                 return
             }
@@ -199,6 +217,13 @@ class EditVC: UIViewController, UITextFieldDelegate {
         let hashedData = SHA256.hash(data: inputData)
         let hashedString = hashedData.compactMap { String(format: "%02x", $0) }.joined()
         return hashedString
+    }
+    
+    private func displayWarning(message: String){
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.view.tintColor = .red
+        present(alert, animated: true, completion: nil)
     }
     
 }

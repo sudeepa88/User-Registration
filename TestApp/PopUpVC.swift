@@ -100,6 +100,23 @@ class PopUpVC: UIViewController, UITextFieldDelegate {
     @objc private func submitButtonTapped() {
         // Handle submit button tapped event
         
+        
+        // Check if any field is empty
+            if accountNameTextField.text?.isEmpty ?? true {
+                displayWarning(message: "Please enter account name")
+                return
+            }
+            
+            if emailTextField.text?.isEmpty ?? true {
+                displayWarning(message: "Please enter email address")
+                return
+            }
+            
+            if passwordTextField.text?.isEmpty ?? true {
+                displayWarning(message: "Please enter password")
+                return
+            }
+        
         print("This is user Account Name->",accountNameTextField.text!)
         print("This is user Email Address->", emailTextField.text!)
         print("This is user Password->", passwordTextField.text!)
@@ -146,5 +163,11 @@ class PopUpVC: UIViewController, UITextFieldDelegate {
         return hashedString
     }
     
+    private func displayWarning(message: String){
+        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.view.tintColor = .red
+        present(alert, animated: true, completion: nil)
+    }
     
 }
